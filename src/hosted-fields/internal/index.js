@@ -107,9 +107,11 @@ function createInputsForAutofill(form) {
   var expMonth = makeMockInput('expiration-month');
   var expYear = makeMockInput('expiration-year');
   var cvv = makeMockInput('cvv');
+  var name = makeMockInput('name');
   var expMonthInput = expMonth.querySelector('input');
   var expYearInput = expYear.querySelector('input');
   var cvvInput = cvv.querySelector('input');
+  var nameInput = name.querySelector('input');
 
   expMonthInput.addEventListener('keydown', function () {
     setTimeout(function () {
@@ -117,7 +119,8 @@ function createInputsForAutofill(form) {
       global.bus.emit(events.AUTOFILL_EXPIRATION_DATE, {
         month: expMonthInput.value,
         year: expYearInput.value,
-        cvv: cvvInput.value
+        cvv: cvvInput.value,
+        name: nameInput.value
       });
     }, TIMEOUT_TO_ALLOW_SAFARI_TO_AUTOFILL);
   });
@@ -125,6 +128,7 @@ function createInputsForAutofill(form) {
   form.appendChild(expMonth);
   form.appendChild(expYear);
   form.appendChild(cvv);
+  form.appendChild(name);
 }
 
 function autofillHandler(fieldComponent) {
